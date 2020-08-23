@@ -1,7 +1,4 @@
-.DS_Store
-src/PyAudio.egg-info
-build/
-dist/
-docs/
-MANIFEST
+/outport.egg-info/
+/setup.cfg
+/setup.py
 __pycache__/
