@@ -27,7 +27,7 @@
 #include <stdio.h>
 #include "Python.h"
 #include "portaudio.h"
-#include "_portaudiomodule.h"
+#include "_portaudio.h"
 
 #ifdef MACOSX
 #include "pa_mac_core.h"
