@@ -112,6 +112,7 @@ class PyAudioTests(unittest.TestCase):
 
         return input_idx, output_idx
 
+    @unittest.skip
     def test_system_info(self):
         """Basic system info tests"""
         self.assertTrue(self.p.get_host_api_count() > 0)
@@ -119,6 +120,7 @@ class PyAudioTests(unittest.TestCase):
         api_info = self.p.get_host_api_info_by_index(0)
         self.assertTrue(len(api_info.items()) > 0)
 
+    @unittest.skip
     def test_input_output_blocking(self):
         """Test blocking-based record and playback."""
         rate = 44100 # frames per second
@@ -179,6 +181,7 @@ class PyAudioTests(unittest.TestCase):
             test_signal,
             len(freqs))
 
+    @unittest.skip
     def test_input_output_callback(self):
         """Test callback-based record and playback."""
         rate = 44100 # frames per second
@@ -248,6 +251,7 @@ class PyAudioTests(unittest.TestCase):
             test_signal,
             len(freqs))
 
+    @unittest.skip
     def test_device_lock_gil_order(self):
         """Ensure no deadlock between Pa_{Open,Start,Stop}Stream and GIL."""
         # This test targets OSX/macOS CoreAudio, which seems to use
@@ -303,6 +307,7 @@ class PyAudioTests(unittest.TestCase):
         in_stream.stop_stream()
         out_stream.stop_stream()
 
+    @unittest.skip
     def test_stream_state_gil(self):
         """Ensure no deadlock between Pa_IsStream{Active,Stopped} and GIL."""
         rate = 44100 # frames per second
@@ -363,6 +368,7 @@ class PyAudioTests(unittest.TestCase):
         in_stream.stop_stream()
         out_stream.stop_stream()
 
+    @unittest.skip
     def test_get_stream_time_gil(self):
         """Ensure no deadlock between PA_GetStreamTime and GIL."""
         rate = 44100 # frames per second
@@ -417,6 +423,7 @@ class PyAudioTests(unittest.TestCase):
         in_stream.stop_stream()
         out_stream.stop_stream()
 
+    @unittest.skip
     def test_get_stream_cpuload_gil(self):
         """Ensure no deadlock between Pa_GetStreamCpuLoad and GIL."""
         rate = 44100 # frames per second
@@ -471,6 +478,7 @@ class PyAudioTests(unittest.TestCase):
         in_stream.stop_stream()
         out_stream.stop_stream()
 
+    @unittest.skip
     def test_get_stream_write_available_gil(self):
         """Ensure no deadlock between Pa_GetStreamWriteAvailable and GIL."""
         rate = 44100 # frames per second
@@ -518,6 +526,7 @@ class PyAudioTests(unittest.TestCase):
         time.sleep(0.1)
         in_stream.stop_stream()
 
+    @unittest.skip
     def test_get_stream_read_available_gil(self):
         """Ensure no deadlock between Pa_GetStreamReadAvailable and GIL."""
         rate = 44100 # frames per second
@@ -565,6 +574,7 @@ class PyAudioTests(unittest.TestCase):
         time.sleep(0.1)
         in_stream.stop_stream()
 
+    @unittest.skip
     def test_terminate_gil(self):
         """Ensure no deadlock between Pa_Terminate and GIL."""
         rate = 44100 # frames per second
