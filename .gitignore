@@ -3,3 +3,4 @@
 /setup.cfg
 /setup.py
 __pycache__/
+*.pyc
