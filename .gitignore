@@ -1,4 +1,5 @@
 /build/
+/dist/
 /outport.egg-info/
 /setup.cfg
 /setup.py
