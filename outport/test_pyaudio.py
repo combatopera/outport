@@ -62,13 +62,13 @@ import sys
 
 import numpy
 
-import pyaudio
+import outport
 
 DUMP_CAPTURE=False
 
 class PyAudioTests(unittest.TestCase):
     def setUp(self):
-        self.p = pyaudio.PyAudio()
+        self.p = outport.PyAudio()
         (self.loopback_input_idx,
          self.loopback_output_idx) = self.get_audio_loopback()
         assert (self.loopback_input_idx is None
@@ -198,15 +198,15 @@ class PyAudioTests(unittest.TestCase):
         state = {'count': 0}
         def out_callback(_, frame_count, time_info, status):
             if state['count'] >= len(audio_chunks):
-                return ('', pyaudio.paComplete)
-            rval = (audio_chunks[state['count']], pyaudio.paContinue)
+                return ('', outport.paComplete)
+            rval = (audio_chunks[state['count']], outport.paContinue)
             state['count'] += 1
             return rval
 
         captured = []
         def in_callback(in_data, frame_count, time_info, status):
             captured.append(in_data)
-            return (None, pyaudio.paContinue)
+            return (None, outport.paContinue)
 
         out_stream = self.p.open(
             format=self.p.get_format_from_width(width),
@@ -264,12 +264,12 @@ class PyAudioTests(unittest.TestCase):
         frames_per_chunk = 1024
 
         def out_callback(_, frame_count, time_info, status):
-            return ('', pyaudio.paComplete)
+            return ('', outport.paComplete)
 
         def in_callback(in_data, frame_count, time_info, status):
             # Release the GIL for a bit
             time.sleep(2)
-            return (None, pyaudio.paComplete)
+            return (None, outport.paComplete)
 
         in_stream = self.p.open(
             format=self.p.get_format_from_width(width),
@@ -316,12 +316,12 @@ class PyAudioTests(unittest.TestCase):
         frames_per_chunk = 1024
 
         def out_callback(_, frame_count, time_info, status):
-            return ('', pyaudio.paComplete)
+            return ('', outport.paComplete)
 
         def in_callback(in_data, frame_count, time_info, status):
             # Release the GIL for a bit
             time.sleep(2)
-            return (None, pyaudio.paComplete)
+            return (None, outport.paComplete)
 
         in_stream = self.p.open(
             format=self.p.get_format_from_width(width),
@@ -377,12 +377,12 @@ class PyAudioTests(unittest.TestCase):
         frames_per_chunk = 1024
 
         def out_callback(_, frame_count, time_info, status):
-            return ('', pyaudio.paComplete)
+            return ('', outport.paComplete)
 
         def in_callback(in_data, frame_count, time_info, status):
             # Release the GIL for a bit
             time.sleep(2)
-            return (None, pyaudio.paComplete)
+            return (None, outport.paComplete)
 
         in_stream = self.p.open(
             format=self.p.get_format_from_width(width),
@@ -432,12 +432,12 @@ class PyAudioTests(unittest.TestCase):
         frames_per_chunk = 1024
 
         def out_callback(_, frame_count, time_info, status):
-            return ('', pyaudio.paComplete)
+            return ('', outport.paComplete)
 
         def in_callback(in_data, frame_count, time_info, status):
             # Release the GIL for a bit
             time.sleep(2)
-            return (None, pyaudio.paComplete)
+            return (None, outport.paComplete)
 
         in_stream = self.p.open(
             format=self.p.get_format_from_width(width),
@@ -489,7 +489,7 @@ class PyAudioTests(unittest.TestCase):
         def in_callback(in_data, frame_count, time_info, status):
             # Release the GIL for a bit
             time.sleep(2)
-            return (None, pyaudio.paComplete)
+            return (None, outport.paComplete)
 
         in_stream = self.p.open(
             format=self.p.get_format_from_width(width),
@@ -537,7 +537,7 @@ class PyAudioTests(unittest.TestCase):
         def out_callback(in_data, frame_count, time_info, status):
             # Release the GIL for a bit
             time.sleep(2)
-            return (None, pyaudio.paComplete)
+            return (None, outport.paComplete)
 
         in_stream = self.p.open(
             format=self.p.get_format_from_width(width),
@@ -585,7 +585,7 @@ class PyAudioTests(unittest.TestCase):
         def out_callback(in_data, frame_count, time_info, status):
             # Release the GIL for a bit
             time.sleep(2)
-            return (None, pyaudio.paComplete)
+            return (None, outport.paComplete)
 
         out_stream = self.p.open(
             format=self.p.get_format_from_width(width),

@@ -42,11 +42,11 @@ import sys
 import time
 import unittest
 
-import pyaudio
+import outport
 
 class PyAudioErrorTests(unittest.TestCase):
     def setUp(self):
-        self.p = pyaudio.PyAudio()
+        self.p = outport.PyAudio()
 
     def tearDown(self):
         self.p.terminate()
@@ -82,7 +82,7 @@ class PyAudioErrorTests(unittest.TestCase):
         with self.assertRaises(IOError):
             stream = self.p.open(channels=1,
                                  rate=44100,
-                                 format=pyaudio.paInt16,
+                                 format=outport.paInt16,
                                  input=True,
                                  start=False)  # not starting stream
             stream.read(2)
@@ -91,7 +91,7 @@ class PyAudioErrorTests(unittest.TestCase):
         with self.assertRaises(IOError):
             stream = self.p.open(channels=1,
                                  rate=44100,
-                                 format=pyaudio.paInt16,
+                                 format=outport.paInt16,
                                  input=True)
             stream.write('foo')
 
@@ -99,14 +99,14 @@ class PyAudioErrorTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             stream = self.p.open(channels=1,
                                  rate=44100,
-                                 format=pyaudio.paInt16,
+                                 format=outport.paInt16,
                                  input=True)
             stream.read(-1)
 
     def test_invalid_attr_on_closed_stream(self):
         stream = self.p.open(channels=1,
                              rate=44100,
-                             format=pyaudio.paInt16,
+                             format=outport.paInt16,
                              input=True)
         stream.close()
         with self.assertRaises(IOError):
@@ -116,15 +116,15 @@ class PyAudioErrorTests(unittest.TestCase):
 
     def test_invalid_format_supported(self):
         with self.assertRaises(ValueError):
-            self.p.is_format_supported(8000, -1, 1, pyaudio.paInt16)
+            self.p.is_format_supported(8000, -1, 1, outport.paInt16)
 
         with self.assertRaises(ValueError):
-            self.p.is_format_supported(8000, 0, -1, pyaudio.paInt16)
+            self.p.is_format_supported(8000, 0, -1, outport.paInt16)
 
     def test_write_underflow_exception(self):
         stream = self.p.open(channels=1,
                              rate=44100,
-                             format=pyaudio.paInt16,
+                             format=outport.paInt16,
                              output=True)
         time.sleep(0.5)
         stream.write('\x00\x00\x00\x00', exception_on_underflow=False)
@@ -137,13 +137,13 @@ class PyAudioErrorTests(unittest.TestCase):
             time.sleep(0.5)
             stream.write('\x00\x00\x00\x00', exception_on_underflow=True)
 
-        self.assertEqual(err.exception.errno, pyaudio.paOutputUnderflowed)
+        self.assertEqual(err.exception.errno, outport.paOutputUnderflowed)
         self.assertEqual(err.exception.strerror, 'Output underflowed')
 
     def test_read_overflow_exception(self):
         stream = self.p.open(channels=1,
                              rate=44100,
-                             format=pyaudio.paInt16,
+                             format=outport.paInt16,
                              input=True)
         time.sleep(0.5)
         stream.read(2, exception_on_overflow=False)
@@ -156,5 +156,5 @@ class PyAudioErrorTests(unittest.TestCase):
             time.sleep(0.5)
             stream.read(2, exception_on_overflow=True)
 
-        self.assertEqual(err.exception.errno, pyaudio.paInputOverflowed)
+        self.assertEqual(err.exception.errno, outport.paInputOverflowed)
         self.assertEqual(err.exception.strerror, 'Input overflowed')
