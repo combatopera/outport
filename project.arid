@@ -48,3 +48,4 @@ pyversions +=
     2
 : TODO: We only need numpy for tests at present.
 requires += numpy
+devel packages += portaudio-devel
