@@ -40,7 +40,7 @@
 
 """PyAudio Example: Play a wave file (callback version)."""
 
-import pyaudio
+import outport
 import wave
 import time
 import sys
@@ -52,12 +52,12 @@ if len(sys.argv) < 2:
 wf = wave.open(sys.argv[1], 'rb')
 
 # instantiate PyAudio (1)
-p = pyaudio.PyAudio()
+p = outport.PyAudio()
 
 # define callback (2)
 def callback(in_data, frame_count, time_info, status):
     data = wf.readframes(frame_count)
-    return (data, pyaudio.paContinue)
+    return (data, outport.paContinue)
 
 # open stream using callback (3)
 stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),

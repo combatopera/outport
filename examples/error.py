@@ -43,15 +43,15 @@ PyAudio Example: Test for a variety of error conditions. This example
 demonstrates exception handling with PyAudio.
 """
 
-import pyaudio
+import outport
 
-p = pyaudio.PyAudio()
+p = outport.PyAudio()
 
 # get invalid sample size
 try:
     p.get_sample_size(10)
 except ValueError as e:
-    assert e.args[1] == pyaudio.paSampleFormatNotSupported
+    assert e.args[1] == outport.paSampleFormatNotSupported
     print("OK: %s" % e.args[0])
 else:
     assert False, "sample size"
@@ -68,7 +68,7 @@ else:
 try:
     p.get_host_api_info_by_type(-1)
 except IOError as e:
-    assert e.args[1] == pyaudio.paHostApiNotFound
+    assert e.args[1] == outport.paHostApiNotFound
     print("OK: %s" % e.args[0])
 else:
     assert False, "invalid host type"
@@ -77,7 +77,7 @@ else:
 try:
     p.get_host_api_info_by_index(-1)
 except IOError as e:
-    assert e.args[1] == pyaudio.paInvalidHostApi
+    assert e.args[1] == outport.paInvalidHostApi
     print("OK: %s" % e.args[0])
 else:
     assert False, "invalid host api index"
@@ -86,8 +86,8 @@ else:
 try:
     p.get_device_info_by_host_api_device_index(0, -1)
 except IOError as e:
-    assert ((e.args[1] == pyaudio.paInvalidDevice) or \
-            (e.args[1] == pyaudio.paInvalidHostApi))
+    assert ((e.args[1] == outport.paInvalidDevice) or \
+            (e.args[1] == outport.paInvalidHostApi))
     print("OK: %s" % e.args[0])
 else:
     assert False, "device info by host api device idnex"
@@ -97,8 +97,8 @@ else:
 try:
     p.get_device_info_by_host_api_device_index(-1, 0)
 except IOError as e:
-    assert ((e.args[1] == pyaudio.paInvalidDevice) or \
-            (e.args[1] == pyaudio.paInvalidHostApi))
+    assert ((e.args[1] == outport.paInvalidDevice) or \
+            (e.args[1] == outport.paInvalidHostApi))
     print("OK: %s" % e.args[0])
 else:
     assert False, "device info by host api device idnex"
@@ -108,7 +108,7 @@ else:
 try:
     p.get_device_info_by_index(-1)
 except IOError as e:
-    assert e.args[1] == pyaudio.paInvalidDevice
+    assert e.args[1] == outport.paInvalidDevice
     print("OK: %s" % e.args[0])
 else:
     assert False, "bad device index"
@@ -117,7 +117,7 @@ else:
 
 stream = p.open(channels = 1,
                 rate = 44100,
-                format = pyaudio.paInt16,
+                format = outport.paInt16,
                 input = True,
                 start = False)
 
@@ -127,7 +127,7 @@ try:
     data = stream.read(2)
 except IOError as e:
     print("OK: %s" % e.args[0])
-    assert e.args[1] == pyaudio.paStreamIsStopped, e.args[1]
+    assert e.args[1] == outport.paStreamIsStopped, e.args[1]
 else:
     assert False, "Should have caused exception"
 
@@ -137,7 +137,7 @@ stream.start_stream()
 try:
     stream.write('foobar')
 except IOError as e:
-    assert e.args[1] == pyaudio.paCanNotWriteToAnInputOnlyStream
+    assert e.args[1] == outport.paCanNotWriteToAnInputOnlyStream
     print("OK: %s" % e.args[0])
 else:
     assert False, "write to input stream"
@@ -155,7 +155,7 @@ try:
     data = stream.read(2)
 except IOError as e:
     # some slower machines might overflow
-    assert e.args[1] == pyaudio.paInputOverflowed, e
+    assert e.args[1] == outport.paInputOverflowed, e
     print("OK: %s" % e.args[0])
 else:
     print("OK: got %d bytes of data" % len(data))
@@ -169,7 +169,7 @@ stream.close()
 try:
     stream.get_input_latency()
 except IOError as e:
-    assert e.args[1] == pyaudio.paBadStreamPtr
+    assert e.args[1] == outport.paBadStreamPtr
     print("OK: %s" % e.args[0])
 else:
     assert False, "closed stream"
@@ -178,25 +178,25 @@ else:
 try:
     stream.read(10)
 except IOError as e:
-    assert e.args[1] == pyaudio.paBadStreamPtr
+    assert e.args[1] == outport.paBadStreamPtr
     print("OK: %s" % e.args[0])
 else:
     assert False, "closed stream"
 
 # get invalid stream capabilities
 try:
-    p.is_format_supported(8000, -1, 1, pyaudio.paInt16)
+    p.is_format_supported(8000, -1, 1, outport.paInt16)
 except ValueError as e:
-    assert e.args[1] == pyaudio.paInvalidDevice
+    assert e.args[1] == outport.paInvalidDevice
     print("OK: %s" % e.args[0])
 else:
     assert False, "invalid device"
 
 # get invalid stream capabilities
 try:
-    p.is_format_supported(8000, 0, -1, pyaudio.paInt16)
+    p.is_format_supported(8000, 0, -1, outport.paInt16)
 except ValueError as e:
-    assert e.args[1] == pyaudio.paInvalidChannelCount
+    assert e.args[1] == outport.paInvalidChannelCount
     print("OK: %s" % e.args[0])
 else:
     assert False, "invalid number of channels"

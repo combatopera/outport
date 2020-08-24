@@ -42,13 +42,13 @@
 PyAudio Example: Mac OS X-only: Play a wave file with channel maps.
 """
 
-import pyaudio
+import outport
 import wave
 import sys
 
 chunk = 1024
 
-PyAudio = pyaudio.PyAudio
+PyAudio = outport.PyAudio
 
 if len(sys.argv) < 2:
     print("Plays a wave file.\n\nUsage: %s filename.wav" % sys.argv[0])
@@ -81,8 +81,8 @@ channel_map = (1, -1)
 # etc...
 
 try:
-    stream_info = pyaudio.PaMacCoreStreamInfo(
-        flags=pyaudio.PaMacCoreStreamInfo.paMacCorePlayNice, # default
+    stream_info = outport.PaMacCoreStreamInfo(
+        flags=outport.PaMacCoreStreamInfo.paMacCorePlayNice, # default
         channel_map=channel_map)
 except AttributeError:
     print("Sorry, couldn't find PaMacCoreStreamInfo. Make sure that "

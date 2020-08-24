@@ -46,7 +46,7 @@ This is the half duplex version.
 """
 
 from __future__ import division
-import pyaudio
+import outport
 import sys
 
 CHUNK = 1024
@@ -58,7 +58,7 @@ RECORD_SECONDS = 5
 if sys.platform == 'darwin':
     CHANNELS = 1
 
-p = pyaudio.PyAudio()
+p = outport.PyAudio()
 
 # Open input stream using default device:
 stream_input = p.open(format=p.get_format_from_width(WIDTH),

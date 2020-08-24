@@ -44,12 +44,12 @@ file.
 """
 
 from __future__ import division
-import pyaudio
+import outport
 import wave
 import sys
 
 CHUNK = 1024
-FORMAT = pyaudio.paInt16
+FORMAT = outport.paInt16
 CHANNELS = 2
 RATE = 44100
 RECORD_SECONDS = 5
@@ -58,7 +58,7 @@ WAVE_OUTPUT_FILENAME = "output.wav"
 if sys.platform == 'darwin':
     CHANNELS = 1
 
-p = pyaudio.PyAudio()
+p = outport.PyAudio()
 
 stream = p.open(format=FORMAT,
                 channels=CHANNELS,

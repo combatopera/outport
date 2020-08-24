@@ -45,7 +45,7 @@ few samples and play them back immediately).
 This is the callback (non-blocking) version.
 """
 
-import pyaudio
+import outport
 import time
 import sys
 
@@ -57,10 +57,10 @@ DURATION = 5
 if sys.platform == 'darwin':
     CHANNELS = 1
 
-p = pyaudio.PyAudio()
+p = outport.PyAudio()
 
 def callback(in_data, frame_count, time_info, status):
-    return (in_data, pyaudio.paContinue)
+    return (in_data, outport.paContinue)
 
 stream = p.open(format=p.get_format_from_width(WIDTH),
                 channels=CHANNELS,

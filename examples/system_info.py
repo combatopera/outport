@@ -45,20 +45,20 @@ Query and print PortAudio HostAPIs, Devices, and their
 support rates.
 """
 
-import pyaudio
+import outport
 
 standard_sample_rates = [8000.0, 9600.0, 11025.0, 12000.0,
                          16000.0, 22050.0, 24000.0, 32000.0,
                          44100.0, 48000.0, 88200.0, 96000.0,
                          192000.0]
 
-p = pyaudio.PyAudio()
+p = outport.PyAudio()
 max_apis = p.get_host_api_count()
 max_devs = p.get_device_count()
 
 print("\nPortAudio System Info:\n======================")
-print("Version: %d" % pyaudio.get_portaudio_version())
-print("Version Text: %s" % pyaudio.get_portaudio_version_text())
+print("Version: %d" % outport.get_portaudio_version())
+print("Version Text: %s" % outport.get_portaudio_version_text())
 print("Number of Host APIs: %d" % max_apis)
 print("Number of Devices  : %d" % max_devs)
 
@@ -102,7 +102,7 @@ for i in range(max_devs):
                     f,
                     input_device = devinfo['index'],
                     input_channels = devinfo['maxInputChannels'],
-                    input_format = pyaudio.paInt16):
+                    input_format = outport.paInt16):
                     input_supported_rates.append(f)
             except ValueError:
                 pass
@@ -113,7 +113,7 @@ for i in range(max_devs):
                     f,
                     output_device = devinfo['index'],
                     output_channels = devinfo['maxOutputChannels'],
-                    output_format = pyaudio.paInt16):
+                    output_format = outport.paInt16):
                     output_supported_rates.append(f)
             except ValueError:
                 pass
@@ -125,10 +125,10 @@ for i in range(max_devs):
                     f,
                     input_device = devinfo['index'],
                     input_channels = devinfo['maxInputChannels'],
-                    input_format = pyaudio.paInt16,
+                    input_format = outport.paInt16,
                     output_device = devinfo['index'],
                     output_channels = devinfo['maxOutputChannels'],
-                    output_format = pyaudio.paInt16):
+                    output_format = outport.paInt16):
                     full_duplex_rates.append(f)
             except ValueError:
                 pass

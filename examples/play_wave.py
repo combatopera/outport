@@ -40,7 +40,7 @@
 
 """PyAudio Example: Play a wave file."""
 
-import pyaudio
+import outport
 import wave
 import sys
 
@@ -53,7 +53,7 @@ if len(sys.argv) < 2:
 wf = wave.open(sys.argv[1], 'rb')
 
 # instantiate PyAudio (1)
-p = pyaudio.PyAudio()
+p = outport.PyAudio()
 
 # open stream (2)
 stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
