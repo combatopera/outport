@@ -7,7 +7,7 @@ PyAudio Documentation
 Introduction
 ------------
 
-.. automodule:: pyaudio
+.. automodule:: outport
    :members:
    :special-members:
    :exclude-members: PyAudio, Stream, PaMacCoreStreamInfo
@@ -19,7 +19,7 @@ Introduction
 Class PyAudio
 -------------
 
-.. autoclass:: pyaudio.PyAudio
+.. autoclass:: outport.PyAudio
    :members:
    :special-members:
 
@@ -27,7 +27,7 @@ Class PyAudio
 Class Stream
 ------------
 
-.. autoclass:: pyaudio.Stream
+.. autoclass:: outport.Stream
    :members:
    :special-members:
 
@@ -40,7 +40,7 @@ Platform Specific
    Class PaMacCoreStreamInfo
    -------------------------
 
-   .. autoclass:: pyaudio.PaMacCoreStreamInfo
+   .. autoclass:: outport.PaMacCoreStreamInfo
       :members:
       :special-members:
 
