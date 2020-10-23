@@ -49,3 +49,4 @@ pyversions +=
 : TODO: We only need numpy for tests at present.
 requires += numpy>=1.16.6
 devel packages += portaudio-devel
+flakes exclude globs += sphinx/conf.py
